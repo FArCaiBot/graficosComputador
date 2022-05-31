@@ -6,22 +6,7 @@ namespace pixel
         Bitmap lienzo = new Bitmap(700, 420);
 
         bool[] banderas = {true,true, true, true, true, true, true, true, true };
-
-        List<String> impresion = new List<string>();
         
-        public void reload()
-        {
-            impresion.ForEach(x =>
-            {
-                switch (x)
-                {
-                    case ("pintar"):
-                        
-                        break;
-                }
-                
-            });
-        }
         
         public Form1()
         {
@@ -102,7 +87,6 @@ namespace pixel
             seg = new Segmento(0, -5.97, 0, 5.97);
             lienzo = seg.encender(lienzo,banderas[1]);
             panel1.Image = lienzo;
-            banderas[1] = !banderas[1];
             if (banderas[1])
                 button2.BackColor = Color.LightGreen;
             else
@@ -350,6 +334,56 @@ namespace pixel
                 t += 0.13;
             } while (t <= 5);
             panel1.Image = lienzo;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            double t = -3;
+            double dt = 0.001;
+            Vector vector = new Vector(0,0);
+            vector.Color = Color.Black;
+            do
+            {
+                vector.X0 = t;
+                vector.Y0 = (-Math.Pow(t, 2) + (5 * t) + 24) / 6.2;
+                lienzo = vector.encender(lienzo);
+                t += dt;
+            } while (t <= 8);
+
+            panel1.Image = lienzo;
+        }
+
+        private async void button12_Click(object sender, EventArgs e)
+        {
+
+            double t = -3;
+            double dt = 0.4;
+            Circunferencia cir = new Circunferencia(0.18, 0, 0);
+            
+            cir.Color = Color.Green;
+
+            for (double i = t; i <=8; i+=dt)
+            {await Task.Delay(100);
+                //limpiar lienzo
+                lienzo= new Bitmap(700, 420);
+                //fotograma
+                button2.PerformClick();
+                //Thread.Sleep(200);
+                
+                cir.X0 = i;
+                cir.Y0 = (-Math.Pow(i, 2) + (5 * i) + 24) / 6.2;
+                lienzo = cir.encenderC(lienzo, true);
+
+                panel1.Image = lienzo;
+                //esperar x tiempo
+                t += dt;
+
+                
+            }
+
+
+
+
         }
     }
     }
