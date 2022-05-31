@@ -6,10 +6,36 @@ namespace pixel
         Bitmap lienzo = new Bitmap(700, 420);
 
         bool[] banderas = {true,true, true, true, true, true, true, true, true };
+
+        List<String> impresion = new List<string>();
+        
+        public void reload()
+        {
+            impresion.ForEach(x =>
+            {
+                switch (x)
+                {
+                    case ("pintar"):
+                        
+                        break;
+                }
+                
+            });
+        }
         
         public Form1()
         {
             InitializeComponent();
+            button1.BackColor = Color.LightGreen;
+            button2.BackColor = Color.LightGreen;
+            button3.BackColor = Color.LightGreen;
+            button4.BackColor = Color.LightGreen;
+            button5.BackColor = Color.LightGreen;
+            button6.BackColor = Color.LightGreen;
+            button7.BackColor = Color.LightGreen;
+            button8.BackColor = Color.LightGreen;
+            button9.BackColor = Color.LightGreen;
+            
             for (int i = 0; i < 700; i++)
             {
                 for(int j = 0; j <420; j++)
@@ -19,6 +45,8 @@ namespace pixel
 
             }
         }
+
+        
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -57,8 +85,13 @@ namespace pixel
             v.Y0 = 3; if (banderas[0]) pintura = v.encender(pintura);
             else pintura = v.apagar(pintura);
 
+
             panel1.Image = v.encender(pintura);
             banderas[0] = !banderas[0];
+            if (banderas[0])
+                button1.BackColor = Color.LightGreen;
+            else
+                button1.BackColor = Color.PaleVioletRed;
         }
         
         private void button2_Click(object sender, EventArgs e)
@@ -70,6 +103,10 @@ namespace pixel
             lienzo = seg.encender(lienzo,banderas[1]);
             panel1.Image = lienzo;
             banderas[1] = !banderas[1];
+            if (banderas[1])
+                button2.BackColor = Color.LightGreen;
+            else
+                button2.BackColor = Color.PaleVioletRed;
         }
 
 
@@ -83,6 +120,10 @@ namespace pixel
             lienzo = seg.encender(lienzo, banderas[2]);
             panel1.Image = lienzo;
             banderas[2] = !banderas[2];
+            if (banderas[2])
+                button3.BackColor = Color.LightGreen;
+            else
+                button3.BackColor = Color.PaleVioletRed;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -93,6 +134,11 @@ namespace pixel
             lienzo = c.encenderC(lienzo,banderas[3]);
             panel1.Image = lienzo;
             banderas[3] = !banderas[3];
+
+            if (banderas[3])
+                button4.BackColor = Color.LightGreen;
+            else
+                button4.BackColor = Color.PaleVioletRed;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -103,6 +149,11 @@ namespace pixel
             lienzo = l.encender(lienzo,banderas[4]);
             panel1.Image = lienzo;
             banderas[4] = !banderas[4];
+
+            if (banderas[4])
+                button5.BackColor = Color.LightGreen;
+            else
+                button5.BackColor = Color.PaleVioletRed;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -111,6 +162,11 @@ namespace pixel
             lienzo = r.encenderR(lienzo,banderas[5]);
             panel1.Image = lienzo;
             banderas[5] = !banderas[5];
+
+            if (banderas[5])
+                button6.BackColor = Color.LightGreen;
+            else
+                button6.BackColor = Color.PaleVioletRed;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -119,6 +175,11 @@ namespace pixel
             espiral(3, 4, 0, 0.5, 20, 20, Color.Black);
             espiral(4, 0, 1, 0.8, 15, 20, Color.Blue);
             banderas[6] = !banderas[6];
+
+            if (banderas[6])
+                button7.BackColor = Color.LightGreen;
+            else
+                button7.BackColor = Color.PaleVioletRed;
         }
 
 
@@ -170,6 +231,11 @@ namespace pixel
             //mostrar segmentos
             panel1.Image = lienzo;
             banderas[7] = !banderas[7];
+
+            if (banderas[7])
+                button8.BackColor = Color.LightGreen;
+            else
+                button8.BackColor = Color.PaleVioletRed;
         }
 
         public void lagrange(double x)
@@ -233,12 +299,18 @@ namespace pixel
 
                     //int b = (int)((255) * ((i - 700) / -700));
 
-                    int b= (int)((-255 * (i - 700)) / 700);
+                    //int b= (int)((-255 * (i - 700)) / 700);
+                    //int g = (int)((255 * i) / 700);
 
-                    int g = (int)((255 * i) / 700);
+                    //azul to aqua
+                    //int g = (int)((245 *i) /700);
 
-                    if(banderas[8])
-                        lienzo.SetPixel(i, j, Color.FromArgb(255,0, g, b));
+                    //blue to white to aque
+                    int r = (int)((255) * (i / 350) * ((i - 700) / (-350)));
+                    int g = (int)((255*(i/350)*((i-700)/(-350)))+(245*(i/700)*((i-350)/350)));
+
+                    if (banderas[8])
+                        lienzo.SetPixel(i, j, Color.FromArgb(255,r, g, 255));
                     else
                         lienzo.SetPixel(i, j, Color.White);
 
@@ -257,7 +329,27 @@ namespace pixel
             panel1.Image = lienzo;
             banderas[8]=!banderas[8];
         }
-        
-            
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            vector3D v3d= new vector3D(0,0,0);
+            double t = -5;
+
+            v3d.Color = Color.Blue;
+            do
+            {
+                double h = -4;
+                do
+                {
+                    v3d.X = t;
+                    v3d.Y = h;
+                    v3d.Z = 0.11 * (Math.Pow(t, 2) - Math.Pow(h, 2)) - 3;
+                    v3d.encender3d(lienzo);
+                    h += 0.13;
+                } while (h <= 4);
+                t += 0.13;
+            } while (t <= 5);
+            panel1.Image = lienzo;
         }
+    }
     }

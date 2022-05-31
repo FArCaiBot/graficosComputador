@@ -11,8 +11,6 @@ namespace pixel
         double x = 0;
         double y = 0;
         double z = 0;
-        double ax = 0;
-        double ay = 0;
 
         public vector3D(double x, double y, double z):base(0,0)
         {
