@@ -222,32 +222,8 @@ namespace pixel
                 button8.BackColor = Color.PaleVioletRed;
         }
 
-        public void lagrange(double x)
-        {
-            List<double>[] puntos = new List<double>[2];
-            puntos[0] = new List<double> { 0, 255 };
-            puntos[1] = new List<double> { 700, 0 };
-
-            double s = 0, p = 1;
-            int n = puntos.Length;
-
-            for(int i = 0; i < n; i++)
-            {
-                p = 1;
-                for (int j = 0; j < n; j++)
-                {
-                    if (i != j)
-                    {
-                        p = p * (x - puntos[1][0]);
-                    }
-                }
-            }
-           
-        }
-
         
         
-
         //datos lagrange
         //int[] b = { 0, 0 };
         //lagrange
@@ -290,13 +266,24 @@ namespace pixel
                     //int g = (int)((245 *i) /700);
 
                     //blue to white to aque
-                    int r = (int)((255) * (i / 350) * ((i - 700) / (-350)));
-                    int g = (int)((255*(i/350)*((i-700)/(-350)))+(245*(i/700)*((i-350)/350)));
+                    //int r = (int)(-255 * (i/350)*((i-700)/350));
+                    //int g = (int)((255*(i/350)*((i-700)/-350)) + (255*(i/700)*(i/350)));
 
-                    if (banderas[8])
-                        lienzo.SetPixel(i, j, Color.FromArgb(255,r, g, 255));
+                    if (i <= 700 / 2)
+                    {
+                        int red = (int)((51 * i) / 70);
+                        int green = (int)((51 * i) / 70);
+                        lienzo.SetPixel(i, j, Color.FromArgb(255, red > 255 ? 255 : red, green > 255 ? 255 : green, 255));
+                    }
                     else
-                        lienzo.SetPixel(i, j, Color.White);
+                    {
+                        int red = (int)(510 - ((51 * i) / 70));
+                        int green = (int)((256 * i) / 35);
+                        lienzo.SetPixel(i, j, Color.FromArgb(255, red > 255 ? 255 : red, green > 255 ? 255 : green, 255));
+                    }
+
+                    
+                   
 
                     //if (i > 350)
                     //{
@@ -338,52 +325,286 @@ namespace pixel
 
         private void button11_Click(object sender, EventArgs e)
         {
-            double t = -3;
+            //Dibujo de la parabola
+            double t = -8;
             double dt = 0.001;
             Vector vector = new Vector(0,0);
             vector.Color = Color.Black;
             do
             {
                 vector.X0 = t;
-                vector.Y0 = (-Math.Pow(t, 2) + (5 * t) + 24) / 6.2;
+                vector.Y0 = (-Math.Pow(t, 2) - (12 * t) - 32)*1.4 ;
+                lienzo = vector.encender(lienzo);
+                t += dt;
+            } while (t <= -4);
+            //segunda parabola
+            t = -4;
+            do
+            {
+                vector.X0 = t;
+                vector.Y0 = (-Math.Pow(t, 2) - (4 * t))*1.125;
+                lienzo = vector.encender(lienzo);
+                t += dt;
+            } while (t <= 0);
+
+            t = 0;
+            //tercera parabola
+            do
+            {
+                vector.X0 = t;
+                vector.Y0 = (-Math.Pow(t, 2) + (4 * t))/1.33;
+                lienzo = vector.encender(lienzo);
+                t += dt;
+            } while (t <= 4);
+
+            //cuarta parabola
+            t = 4;
+            do
+            {
+                vector.X0 = t;
+                vector.Y0 = (-Math.Pow(t, 2) + (12 * t)-32)/2.6;
                 lienzo = vector.encender(lienzo);
                 t += dt;
             } while (t <= 8);
-
             panel1.Image = lienzo;
         }
 
         private async void button12_Click(object sender, EventArgs e)
         {
 
-            double t = -3;
-            double dt = 0.4;
+            double t = -8;
+            double dt = 0.3;
             Circunferencia cir = new Circunferencia(0.18, 0, 0);
             
             cir.Color = Color.Green;
-
-            for (double i = t; i <=8; i+=dt)
-            {await Task.Delay(100);
+            //primera animacion
+            for (double i = t; i <=-4; i+=dt)
+            {
+                await Task.Delay(60);
                 //limpiar lienzo
                 lienzo= new Bitmap(700, 420);
                 //fotograma
                 button2.PerformClick();
+                button11.PerformClick();
                 //Thread.Sleep(200);
                 
                 cir.X0 = i;
-                cir.Y0 = (-Math.Pow(i, 2) + (5 * i) + 24) / 6.2;
+                cir.Y0 = (-Math.Pow(t, 2) - (12 * t) - 32) * 1.4;
+                lienzo = cir.encenderC(lienzo, true);
+
+                panel1.Image = lienzo;
+                //esperar x tiempo
+                t += dt;                
+            }
+
+            //segunda animacion
+            t = -4;
+            for (double i = t; i <= 0; i += dt)
+            {
+                await Task.Delay(60);
+                //limpiar lienzo
+                lienzo = new Bitmap(700, 420);
+                //fotograma
+                button2.PerformClick();
+                button11.PerformClick();
+                
+
+                cir.X0 = i;
+                cir.Y0 = (-Math.Pow(t, 2) - (4 * t)) * 1.125;
                 lienzo = cir.encenderC(lienzo, true);
 
                 panel1.Image = lienzo;
                 //esperar x tiempo
                 t += dt;
-
-                
             }
 
+            //tercera animacion
+            t = 0;
+            for (double i = t; i <= 4; i += dt)
+            {
+                await Task.Delay(60);
+                //limpiar lienzo
+                lienzo = new Bitmap(700, 420);
+                //fotograma
+                button2.PerformClick();
+                button11.PerformClick();
 
 
+                cir.X0 = i;
+                cir.Y0 = (-Math.Pow(t, 2) + (4 * t)) / 1.33;
+                lienzo = cir.encenderC(lienzo, true);
+
+                panel1.Image = lienzo;
+                //esperar x tiempo
+                t += dt;
+            }
+            //cuarta animacion
+            t = 4;
+            for (double i = t; i <= 8; i += dt)
+            {
+                await Task.Delay(60);
+                //limpiar lienzo
+                lienzo = new Bitmap(700, 420);
+                //fotograma
+                button2.PerformClick();
+                button11.PerformClick();
+
+
+                cir.X0 = i;
+                cir.Y0 = (-Math.Pow(t, 2) + (12 * t) - 32) / 2.6;
+                lienzo = cir.encenderC(lienzo, true);
+
+                panel1.Image = lienzo;
+                //esperar x tiempo
+                t += dt;
+            }
+        }
+
+
+        
+
+        
+        
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //valores de puntos
+            List<Punto> red = new List<Punto>();
+            red.Add(new Punto(0, 0));
+            red.Add(new Punto(350,255)); 
+            red.Add(new Punto(700, 0));
+            
+            List<Punto> green = new List<Punto>();
+            green.Add(new Punto(0, 0));
+            green.Add(new Punto(350, 255));
+            green.Add(new Punto(700, 255));
+            
+            List<Punto> blue = new List<Punto>();
+            blue.Add(new Punto(0, 255));
+            blue.Add(new Punto(350, 255));
+            blue.Add(new Punto(700, 255));
+            
+            TestFunctions fun = new TestFunctions();
+            
+            for (int i = 0; i < 700; i++)
+            {
+                for (int j = 0; j < 420; j++)
+                {
+                    int r = (int)fun.lagrange(red,i);
+                    int g = (int) fun.lagrange(green,i);
+                    int b= (int)fun.lagrange(blue, i);
+                    lienzo.SetPixel(i, j, Color.FromArgb(255, r > 255 ? 255 : r, g > 255 ? 255 : g, b > 255 ? 255 : b));
+                    //Console.WriteLine(b);
+                }
+            }
+            panel1.Image = lienzo;
+            //banderas[8] = !banderas[8];
+        }
+
+        private async void button14_Click(object sender, EventArgs e)
+        {
+            //pintar cir de radio 3
+            
+            double rad = 3;
+
+            //pintar segmento
+            Segmento seg = new Segmento(0, 0, 0, 0); seg.Color = Color.Blue;
+            double t = 0;
+            double dt = 0.04;
+            do
+            {
+                lienzo = new Bitmap(700, 420);
+                Circunferencia cir = new Circunferencia(3, 0, 0);
+                lienzo = cir.encenderC(lienzo, true);
+
+                seg.Xf=(rad * (Math.Cos(t)));
+                seg.Yf=(rad * (Math.Sin(t)));
+
+
+                lienzo = seg.encender(lienzo,true);
+               
+                t += dt;
+                panel1.Image = lienzo;
+
+                await Task.Delay(60);
+            } while (t <= (2 * Math.PI));
+            
+            
+
+
+            //pintar lienzo
+            
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            Vector v = new Vector(0, 0);
+            Vector v1 = new Vector(0, 0);
+
+            double t = -2;
+            double dt = 0.001;
+            do
+            {
+                v.Color = Color.Blue;
+                v.X0 = t;
+                v.Y0 = 1 / (t + 3);
+                lienzo = v.encender(lienzo);
+
+                v1.Color = Color.Black;
+                v1.X0 = t;
+                v1.Y0 = (0.3333) - (t / 9) + (Math.Pow(t, 2) / 27);
+                lienzo = v1.encender(lienzo);
+                t += dt;
+
+            } while (t < 10);
+
+            panel1.Image = lienzo;
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            Onda on = new Onda();
+            lienzo= on.graficarOnda(lienzo);
+            panel1.Image = lienzo;
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            Onda on = new Onda();
+            lienzo = on.grafOnda3d(lienzo);
+            panel1.Image = lienzo;
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            Onda on = new Onda();
+            lienzo = on.interferencia(lienzo);
+            panel1.Image = lienzo;
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            lienzo= new Bitmap(700, 420);
+            Onda on = new Onda();
+            lienzo = on.interferencia3D(lienzo);
+            panel1.Image = lienzo;
+        }
+
+        private async void button20_Click(object sender, EventArgs e)
+        {
+            double t = 0;
+            double dtp = 0.05;
+
+            Onda on = new Onda();
+            do
+            {
+                on.TO = t;
+               lienzo = on.graficarOnda(lienzo);
+                t += dtp;
+                panel1.Image = lienzo;
+                await Task.Delay(5);
+            } while (t < 6);
+            
 
         }
     }
-    }
+}
