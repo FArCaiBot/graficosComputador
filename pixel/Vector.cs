@@ -17,6 +17,7 @@ namespace pixel
         Color color = Color.Red;
 
         double x1=-10, x2=10, y1=-5.98, y2=5.98;
+        //double x1 = -20, x2 = 20, y1 = -11.96, y2 =11.96;
         double sx1=0, sx2=700, sy1=0, sy2=420;
 
 

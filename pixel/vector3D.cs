@@ -41,8 +41,6 @@ namespace pixel
             return apagar(pintura);
         }
 
-
-
     }
 
 }

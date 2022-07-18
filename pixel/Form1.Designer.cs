@@ -49,6 +49,15 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.button22 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -252,7 +261,7 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(838, 33);
+            this.button20.Location = new System.Drawing.Point(981, 409);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(114, 23);
             this.button20.TabIndex = 24;
@@ -260,11 +269,110 @@
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(981, 365);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(114, 23);
+            this.button21.TabIndex = 25;
+            this.button21.Text = "Animacion Interf";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(981, 326);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(114, 23);
+            this.button22.TabIndex = 26;
+            this.button22.Text = "Animacion 3D";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(981, 286);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(114, 23);
+            this.button23.TabIndex = 27;
+            this.button23.Text = "A. Interf. 3D";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(981, 246);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(75, 23);
+            this.button24.TabIndex = 28;
+            this.button24.Text = "Huyguens";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
+            // button25
+            // 
+            this.button25.Location = new System.Drawing.Point(981, 200);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(75, 23);
+            this.button25.TabIndex = 29;
+            this.button25.Text = "button25";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(981, 171);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(75, 23);
+            this.button26.TabIndex = 30;
+            this.button26.Text = "Tgrupo";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
+            // button27
+            // 
+            this.button27.Location = new System.Drawing.Point(981, 132);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(75, 23);
+            this.button27.TabIndex = 31;
+            this.button27.Text = "button27";
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(983, 88);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(75, 23);
+            this.button28.TabIndex = 32;
+            this.button28.Text = "Cuerda";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // button29
+            // 
+            this.button29.Location = new System.Drawing.Point(989, 49);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(100, 23);
+            this.button29.TabIndex = 33;
+            this.button29.Text = "Cuerda Anim";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(967, 458);
+            this.ClientSize = new System.Drawing.Size(1101, 458);
+            this.Controls.Add(this.button29);
+            this.Controls.Add(this.button28);
+            this.Controls.Add(this.button27);
+            this.Controls.Add(this.button26);
+            this.Controls.Add(this.button25);
+            this.Controls.Add(this.button24);
+            this.Controls.Add(this.button23);
+            this.Controls.Add(this.button22);
+            this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -315,5 +423,14 @@
         private Button button18;
         private Button button19;
         private Button button20;
+        private Button button21;
+        private Button button22;
+        private Button button23;
+        private Button button24;
+        private Button button25;
+        private Button button26;
+        private Button button27;
+        private Button button28;
+        private Button button29;
     }
 }

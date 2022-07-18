@@ -6,6 +6,8 @@ namespace pixel
         Bitmap lienzo = new Bitmap(700, 420);
 
         bool[] banderas = {true,true, true, true, true, true, true, true, true };
+
+        
         
         
         public Form1()
@@ -604,6 +606,184 @@ namespace pixel
                 await Task.Delay(5);
             } while (t < 6);
             
+
+        }
+
+        private async void button21_Click(object sender, EventArgs e)
+        {
+            double t = 0;
+            double dtp = 0.05;
+
+            Onda on = new Onda();
+            do
+            {
+                on.TO = t;
+                lienzo = on.interferencia(lienzo);
+                t += dtp;
+                panel1.Image = lienzo;
+                await Task.Delay(5);
+            } while (t < 6);
+        }
+
+        private async void button22_Click(object sender, EventArgs e)
+        {
+            double t = 0;
+            double dtp = 0.05;
+
+            Onda on = new Onda();
+            do
+            {
+                on.TO = t;
+                lienzo = on.grafOnda3d(lienzo);
+                t += dtp;
+                panel1.Image = lienzo;
+                await Task.Delay(60);
+                lienzo = new Bitmap(700, 420);
+            } while (t < 6);
+
+        }
+
+        private async void button23_Click(object sender, EventArgs e)
+        {
+            double t = 0;
+            double dtp = 0.05;
+
+            Onda on = new Onda();
+            do
+            {
+                on.TO = t;
+                lienzo = on.interferencia3D(lienzo);
+                t += dtp;
+                panel1.Image = lienzo;
+                await Task.Delay(60);
+                lienzo = new Bitmap(700, 420);
+            } while (t < 6);
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            lienzo = new Bitmap(700, 420);
+            Onda on = new Onda();
+            lienzo = on.huyguens(lienzo);
+            panel1.Image = lienzo;
+        }
+
+        private async void button25_Click(object sender, EventArgs e)
+        {
+            double t = 0;
+            double dtp = 0.05;
+
+            Onda on = new Onda();
+            do
+            {
+                on.TO = t;
+                lienzo = on.huyguens(lienzo);
+                t += dtp;
+                panel1.Image = lienzo;
+                panel1.Refresh();
+            } while (t < 6);
+
+        }
+
+        private async void button26_Click(object sender, EventArgs e)
+        {
+            double t = 0;
+            double dt = 0.03;
+            Segmento seg = new Segmento(-7, -3, -2, 3);
+            
+            Circunferencia cir = new Circunferencia(0.18, 0, 0);
+            cir.Color = Color.Green;
+            do
+            {
+                seg.encender(lienzo,true);
+                panel1.Image = lienzo;
+                button2.PerformClick();
+                button27.PerformClick();
+                cir.X0 = (-7 * (1 - t) + (-2 * t));
+                cir.Y0 = (-3 * (1 - t) + (3 * t));
+                cir.encenderC(lienzo, true);
+                t += dt;
+                panel1.Image = lienzo;
+                await Task.Delay(60);
+                lienzo = new Bitmap(700, 420);
+                
+
+            } while (t <= 1);
+
+
+
+            t = -2;
+            dt = 0.1;
+            
+
+            for (double i = t; i <= 4; i += dt)
+            {
+                await Task.Delay(60);
+                //limpiar lienzo
+                lienzo = new Bitmap(700, 420);
+                //fotograma
+                button2.PerformClick();
+                button27.PerformClick();
+                //Thread.Sleep(200);
+
+                cir.X0 = i;
+                cir.Y0 = (((-Math.Pow(t, 2)) + (2 * t) + 8) / (4.5)) + 3;
+                lienzo = cir.encenderC(lienzo, true);
+
+                panel1.Image = lienzo;
+                //esperar x tiempo
+                t += dt;
+            }
+
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            Circunferencia cir1 = new Circunferencia(0.4, -7, -3);
+            cir1.encenderC(lienzo,true);
+            panel1.Image = lienzo;
+            cir1.X0 = -2; cir1.Y0 = 3;
+            cir1.encenderC(lienzo, true);
+            panel1.Image=lienzo;
+            cir1.X0 = 1; cir1.Y0 = 5;
+            cir1.encenderC(lienzo, true);
+            panel1.Image = lienzo;
+            cir1.X0 = 4; cir1.Y0 = 3;
+            cir1.encenderC(lienzo, true);
+            panel1.Image = lienzo;
+            
+
+
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            CuerdaV cuerda = new CuerdaV();
+            cuerda.graficarCuerda(lienzo);
+            panel1.Image = lienzo;
+
+        }
+
+        private async void button29_Click(object sender, EventArgs e)
+        {
+            CuerdaV cuerda = new CuerdaV();
+            double t = 0;
+            double dtp = 0.02;
+
+            
+            do
+            {
+                cuerda.T = t;
+                button2.PerformClick();
+                lienzo = cuerda.graficarCuerda(lienzo);
+                t += dtp;
+                panel1.Image = lienzo;
+                await Task.Delay(5);
+                lienzo = new Bitmap(700, 420);
+            } while (t < 15);
 
         }
     }
